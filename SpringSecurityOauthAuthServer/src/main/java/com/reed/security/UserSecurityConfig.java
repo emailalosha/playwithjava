@@ -18,7 +18,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/users").permitAll().antMatchers("/")
+        http.authorizeRequests().antMatchers("/users","/hello").permitAll()
+        .antMatchers("/")
         .hasAnyRole("ADMIN","USER")
            .anyRequest().authenticated()
           .and().httpBasic();

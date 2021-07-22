@@ -28,6 +28,14 @@ public class MyRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saveUser);
 	}
 	
+	@GetMapping("/hello")
+	public ResponseEntity<Object> hello()
+	{
+		LOGGER.info("About to hello you....");
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body("Hello ........");
+	}
+	
 	@GetMapping("/welcome")
 	public ResponseEntity<Object> welcome()
 	{
