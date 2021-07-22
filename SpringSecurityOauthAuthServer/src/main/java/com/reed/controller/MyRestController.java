@@ -28,6 +28,14 @@ public class MyRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saveUser);
 	}
 	
+	@GetMapping("/oauth/users")
+	public ResponseEntity<Object> getUser()
+	{
+		LOGGER.info("About to get user and roles ");
+	
+		return ResponseEntity.status(HttpStatus.CREATED).body(myRestService.getUser());
+	}
+	
 	@GetMapping("/hello")
 	public ResponseEntity<Object> hello()
 	{

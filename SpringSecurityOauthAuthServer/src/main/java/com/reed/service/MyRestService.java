@@ -32,5 +32,9 @@ public class MyRestService {
 		
 		return userRepo.save(user);
 	}
+
+	public List<User> getUser() {
+		return userRepo.findAll();
+	}
 	
 }

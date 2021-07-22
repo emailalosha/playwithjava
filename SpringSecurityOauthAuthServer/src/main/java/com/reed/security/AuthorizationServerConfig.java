@@ -22,11 +22,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		  
 	        clients.inMemory()
 	        .withClient("javainuse")
-	        .secret("secret")
+	        .secret("{noop}secret")
 	        .authorizedGrantTypes("authorization_code")
 	        .scopes("read")
 	        .authorities("CLIENT")
-	        .redirectUris("http://localhost:8090/hello");
+	        .redirectUris("http://localhost:8090/hello")
+	        ;
 	    }
 	
 }
