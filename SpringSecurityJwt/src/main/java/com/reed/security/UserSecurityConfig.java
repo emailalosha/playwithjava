@@ -1,5 +1,7 @@
 package com.reed.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Configuration
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(UserSecurityConfig.class);
 
 	@Autowired
 	MyUserDetailsService myUserDetailsService;
@@ -34,6 +38,9 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 
   @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	  LOGGER.info("Authentication has been initiated....");
+	  
+	  
 	auth.userDetailsService(myUserDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
 }
   

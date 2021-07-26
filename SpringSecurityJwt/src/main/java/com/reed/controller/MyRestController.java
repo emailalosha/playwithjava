@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,14 +71,16 @@ public class MyRestController {
 	
 	@PostMapping("/authenticate")
 	public ResponseEntity<String> getJwtToken(@RequestBody AuthenticateUser authenticateUser) {
-		System.out.println(authenticateUser);
-		
+		System.out.println(authenticateUser);	
 		try
 		{
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateUser.getUserName(),
+			Authentication authenticate = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authenticateUser.getUserName(),
 					authenticateUser.getPassword()));
-			final UserDetails userDetails = myUserdetailsService.loadUserByUsername(authenticateUser.getUserName());
-			final String jwt = jwtUtil.generateToken(userDetails);
+			UserDetails principal = (UserDetails) authenticate.getPrincipal();
+			
+		//	final UserDetails userDetails = myUserdetailsService.loadUserByUsername(authenticateUser.getUserName());
+			final String jwt = jwtUtil.generateToken(principal);
 			return ResponseEntity.status(HttpStatus.CREATED).body(jwt);
 		}
 		catch(BadCredentialsException badCredentialsException)

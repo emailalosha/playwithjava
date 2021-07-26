@@ -31,7 +31,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(MyUserDetailsService.clas
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	
-		
+		LOGGER.info("About to find user into DB : "+username);
 		User user = userRepo.findByUserName(username);
 		long userId = user.getUserId();
 		ArrayList<Role> allRoles = (ArrayList<Role>) roleRepo.findByUserId(userId);
