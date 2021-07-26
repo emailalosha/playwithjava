@@ -15,18 +15,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private static Logger LOGGER = LoggerFactory.getLogger(AuthorizationServerConfig.class);
 	
 	  @Override
-	    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+	    public void configure(@SuppressWarnings("deprecation") ClientDetailsServiceConfigurer clients) throws Exception {
 		  
 		  LOGGER.info("About to validate oauth parameter....");
 		  
 		  
 	        clients.inMemory()
-	        .withClient("javainuse")
-	        .secret("{noop}secret")
+	        .withClient("frederick_testing")
+	        .secret("{noop}guess_me_not")
+	        .accessTokenValiditySeconds(3600)
 	        .authorizedGrantTypes("authorization_code")
 	        .scopes("read")
 	        .authorities("CLIENT")
 	        .redirectUris("http://localhost:8090/hello")
+	       
+	        
 	        ;
 	    }
 	

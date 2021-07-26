@@ -14,7 +14,7 @@ public class MyController {
         return new ModelAndView("hello");
     }
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/code", method = RequestMethod.GET)
     public ModelAndView test() {
         return new ModelAndView("test");
     }
